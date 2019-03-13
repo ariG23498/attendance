@@ -1,12 +1,14 @@
 import 'working/scanning.dart';
 import 'working/authentication.dart';
 import 'package:flutter/material.dart';
+import 'pages/attendAnimation.dart';
 
 void main() {
   runApp(MaterialApp(
     title: "Attendance",
     debugShowCheckedModeBanner: false,
-    home: new MyApp(),
+    //home: new MyApp(),
+    home: SuccessAnimate(),
   ));
 }
 
