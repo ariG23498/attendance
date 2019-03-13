@@ -7,8 +7,8 @@ void main() {
   runApp(MaterialApp(
     title: "Attendance",
     debugShowCheckedModeBanner: false,
-    //home: new MyApp(),
-    home: SuccessAnimate(),
+    home: new MyApp(),
+    //home: SuccessAnimate(),
   ));
 }
 
@@ -19,6 +19,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String barcode = "Welcome To the App";
+  int validity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +37,19 @@ class _MyAppState extends State<MyApp> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           scan.qrScan().then((_) {
-            setState(() {
-              this.barcode = scan.barcode;
-            });
+            this.validity = scan.validity;
+            print(this.validity);
+            if (this.validity == 1) {
+              print("Hello");
+              Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => SuccessAnimate()));
+            } else {
+              setState(() {
+                this.barcode = scan.barcode;
+              });
+            }
           });
         },
         icon: Icon(Icons.camera_alt),

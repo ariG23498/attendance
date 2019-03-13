@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'dart:async';
 
 class SuccessAnimate extends StatefulWidget {
   @override
@@ -8,6 +9,12 @@ class SuccessAnimate extends StatefulWidget {
 
 class _SuccessAnimateState extends State<SuccessAnimate> {
   @override
+  initState() {
+    super.initState();
+    new Timer(const Duration(seconds: 2), onClose);
+  } 
+  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: new Center(
@@ -15,4 +22,8 @@ class _SuccessAnimateState extends State<SuccessAnimate> {
       ),
     );
   }
+  void onClose() {
+    Navigator.pop(context);
+  }
+  
 }
