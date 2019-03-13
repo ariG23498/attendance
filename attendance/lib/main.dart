@@ -1,6 +1,9 @@
 import 'working/scanning.dart';
 import 'package:flutter/material.dart';
 import 'pages/attendAnimation.dart';
+import 'package:numberpicker/numberpicker.dart';
+
+int rollNo;
 
 void main() {
   runApp(MaterialApp(
@@ -11,7 +14,8 @@ void main() {
       accentColor: Color(0xFFF4B400),
     ),
     debugShowCheckedModeBanner: false,
-    home: new MyApp(),
+    //home: new MyApp(),
+    home: new RegScreen(),
     //home: SuccessAnimate(),
   ));
 }
@@ -37,7 +41,7 @@ class _MyAppState extends State<MyApp> {
       ),
       body: new Center(
         child: new Text(
-          barcode,
+          "barcode $rollNo",
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.grey),
         ),
@@ -74,6 +78,48 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+}
+
+class RegScreen extends StatefulWidget {
+  @override
+  _RegScreenState createState() => _RegScreenState();
+}
+
+class _RegScreenState extends State<RegScreen> {
+  int roll = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: new Container(
+        child: new Center(
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Text("ROll NO : $roll"),
+              new NumberPicker.integer(
+                initialValue: 1,
+                minValue: 1,
+                maxValue: 200,
+                onChanged: (newValue) {
+                  setState(() {
+                    roll = newValue;
+                    rollNo = newValue;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, new MaterialPageRoute(builder: (context) => MyApp()));
+        },
+        child: Icon(Icons.arrow_forward),
+      ),
     );
   }
 }
