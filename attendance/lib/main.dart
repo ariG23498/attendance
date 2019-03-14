@@ -9,7 +9,7 @@ void main() {
     theme: ThemeData(
       brightness: Brightness.light,
       primaryColor: Color(0xFFF4B400),
-      accentColor: Color(0xFFF4B400),
+      accentColor: Colors.white,
     ),
     debugShowCheckedModeBanner: false,
     home: new RegScreen(),

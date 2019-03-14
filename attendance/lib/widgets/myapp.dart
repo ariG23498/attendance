@@ -15,16 +15,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text(
-          "Attendance",
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-      ),
       body: new Center(
         child: new Text(
-          "barcode $rollNo",
+          "Roll No : $rollNo",
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.grey),
         ),
@@ -33,10 +26,9 @@ class _MyAppState extends State<MyApp> {
         onPressed: () {
           scan.qrScan().then((onValue) {
             // this.validity = scan.validity;
-            if(onValue){
+            if (onValue) {
               this.validity = 1;
-            }
-            else{
+            } else {
               this.validity = 2;
             }
             print("Validity : ${this.validity}");
@@ -59,11 +51,11 @@ class _MyAppState extends State<MyApp> {
         },
         icon: Icon(
           Icons.camera_alt,
-          color: Colors.white,
+          color: Color(0xFFF4B400),
         ),
         label: Text(
           "Scan",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Color(0xFFF4B400)),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
