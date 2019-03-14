@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'widgets/regscreen.dart';
+
 int rollNo;
+
 void main() {
   runApp(MaterialApp(
     title: "Attendance",
@@ -10,8 +12,6 @@ void main() {
       accentColor: Color(0xFFF4B400),
     ),
     debugShowCheckedModeBanner: false,
-    //home: new MyApp(),
     home: new RegScreen(),
-    //home: SuccessAnimate(),
   ));
 }

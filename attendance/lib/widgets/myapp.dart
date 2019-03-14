@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../pages/attendAnimation.dart';
+import 'attendAnimation.dart';
 import '../working/scanning.dart';
 import '../main.dart';
 
@@ -31,9 +31,15 @@ class _MyAppState extends State<MyApp> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          scan.qrScan().then((_) {
-            this.validity = scan.validity;
-            print(this.validity);
+          scan.qrScan().then((onValue) {
+            // this.validity = scan.validity;
+            if(onValue){
+              this.validity = 1;
+            }
+            else{
+              this.validity = 2;
+            }
+            print("Validity : ${this.validity}");
             if (this.validity == 1) {
               print("Hello");
               Navigator.push(
