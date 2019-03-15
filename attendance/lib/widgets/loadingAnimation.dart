@@ -25,6 +25,10 @@ class _LoaginAnimateState extends State<LoaginAnimate> {
         if(authQr.resCode == 201){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>SuccessAnimate()));
         }
+        else{
+          Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ErrorAnimate()));
+        }
       });
     } else {
       Navigator.push(
