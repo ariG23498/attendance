@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'widgets/regscreen.dart';
-
 int rollNo;
 String barcode;
 

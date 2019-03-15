@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'attendAnimation.dart';
+import 'successAnimation.dart';
 import '../working/scanning.dart';
 import '../main.dart';
 import '../working/authentication.dart';
+import 'loadingAnimation.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -25,31 +26,46 @@ class _MyAppState extends State<MyApp> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          // scan.qrScan().then((_) {
+          //   this.validity = scan.validity;
+          //   print("Validity : ${this.validity}");
+          //   if (this.validity == 1) {
+          //     authQr.sendAuth(barcode).then((_) {
+          //       if (authQr.resCode == 201) {
+          //         Navigator.push(
+          //             context,
+          //             new MaterialPageRoute(
+          //                 builder: (context) => SuccessAnimate())).then((_) {
+          //           setState(() {
+          //             status = "Validated";
+          //           });
+          //         });
+          //       } else {
+          //         setState(() {
+          //           status = "Invalid";
+          //         });
+          //       }
+          //     });
+          //   } else {
+          //     setState(() {
+          //       status = "Ivalid";
+          //     });
+          //   }
+          // });
           scan.qrScan().then((_) {
             this.validity = scan.validity;
-            print("Validity : ${this.validity}");
             if (this.validity == 1) {
-              authQr.sendAuth(barcode).then((_) {
-                if (authQr.resCode == 201) {
-                  Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => SuccessAnimate())).then((_) {
-                    setState(() {
-                      status = "Validated";
-                    });
-                  });
-                } else {
-                  setState(() {
-                    status = "Invalid";
-                  });
-                }
-              });
-            } else {
               setState(() {
-                status = "Ivalid";
+                status = "SCANNED";
               });
-            }
+              Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => LoaginAnimate(this.validity)));
+            } else
+              setState(() {
+                status = "NOT SCANNED";
+              });
           });
         },
         icon: Icon(

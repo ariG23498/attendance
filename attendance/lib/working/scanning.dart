@@ -13,14 +13,8 @@ class Scanning {
   Future qrScan() async {
     try {
       String bar = await BarcodeScanner.scan();
+      //here barcode global is set
       barcode = bar;
-      // print("Sending Request");
-      // authQr.sendAuth(this.barcode).then((_) {
-      //   if (authQr.resCode == 201)
-      //     this.validity = 1;
-      //   else
-      //     this.validity = 2;
-      // });
       this.validity = 1;
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
@@ -31,8 +25,7 @@ class Scanning {
         this.validity = 2;
       }
     } on FormatException {
-      // barcode =
-      //     'null (User returned using the "back"-button before scanning anything. Result)';
+      // barcode = 'null (User returned using the "back"-button before scanning anything. Result)';
       this.validity = 2;
     } catch (e) {
       // barcode = 'Unknown error : $e';
