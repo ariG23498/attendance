@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'attendAnimation.dart';
 import '../working/scanning.dart';
 import '../main.dart';
+import '../working/authentication.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -9,42 +10,44 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String barcode = "";
   int validity = 0;
-
+  int resCode = 400;
+  String status = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: new Center(
         child: new Text(
-          "Roll No : $rollNo",
+          "Roll No : $rollNo $status",
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.grey),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          scan.qrScan().then((onValue) {
-            // this.validity = scan.validity;
-            if (onValue) {
-              this.validity = 1;
-            } else {
-              this.validity = 2;
-            }
+          scan.qrScan().then((_) {
+            this.validity = scan.validity;
             print("Validity : ${this.validity}");
             if (this.validity == 1) {
-              print("Hello");
-              Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                      builder: (context) => SuccessAnimate())).then((_) {
-                setState(() {
-                  this.barcode = "Validated";
-                });
+              authQr.sendAuth(barcode).then((_) {
+                if (authQr.resCode == 201) {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => SuccessAnimate())).then((_) {
+                    setState(() {
+                      status = "Validated";
+                    });
+                  });
+                } else {
+                  setState(() {
+                    status = "Invalid";
+                  });
+                }
               });
             } else {
               setState(() {
-                this.barcode = scan.barcode;
+                status = "Ivalid";
               });
             }
           });
